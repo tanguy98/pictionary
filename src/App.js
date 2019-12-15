@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import HeadBand from './Components/HeadBand/HeadBand.js';
 import './App.css';
 
 function App() {
-  return (
+
+  const listeParties = ['Partie 1', 'partie 2','partie 3', 'partie 4'];
+  const listeItems = listeParties.map( (partie) => <li>{partie}</li> )
+
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          Après on pourra jouer au Pictionary avec Liloïe!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     
+      <HeadBand/> 
+      
+      <body className="App-body">
+         <ul> {listeItems} </ul>
+      </body>
+
     </div>
   );
 }

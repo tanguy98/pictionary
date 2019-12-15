@@ -66,3 +66,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Rajouté par mes soins :
+
+Version des packages et modules installés :
+Node.js : v12.1.0
+create-react-app (framework JS): v3.2.0
+bootstrap (framework CSS): v4.4.1 (cf package.json)
+
+Commandes d'installations :
+[Node.js est à téléchargé depuis internet : https://nodejs.org/en/ ]
+npm (node package manager) vous permettra d'installer les dépendances nécéssaires :
+
+npm install create-react-app
+npm install bootstrap
+
+
