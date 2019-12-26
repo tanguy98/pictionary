@@ -15,6 +15,6 @@ function HeadBand() {
             <div className="BandeNoire"/>
         </div>
     )
-}
+};
 
 export default HeadBand;
