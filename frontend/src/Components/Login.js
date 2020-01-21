@@ -44,7 +44,8 @@ class Login extends Component {
     // Fonction exécutée au log in : 
     async handleLogin(event) {
                 // Connexion
-                event.preventDefault();
+                console.log(event);
+                /*event.preventDefault();
 
                 const { email, password } = this.state;
         
@@ -68,7 +69,7 @@ class Login extends Component {
                             connectUser: true
                         });
                     }
-                }
+                }*/
                 
             }
 
@@ -97,11 +98,16 @@ class Login extends Component {
         // to implement
     }
 
+// parametre value
+//onChange pour mettre a jour le state
+
+
   render() {
       return(
 
         <div>
             <h3>Login</h3>
+
             <Form onSubmit={this.handleLogin}>
                 <Form.Group controlId="formBasicUsername">
                     <Form.Label>Email : </Form.Label>

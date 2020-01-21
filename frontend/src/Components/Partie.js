@@ -1,9 +1,9 @@
 import React from 'react';
 import '../App.css';
+//import withrouter
 
 function Partie() {
-
-  return(<p>Woooo ça marche tu es dans l'onglet partie !</p>);
+  // const id_partie = this.props.match.params.id_partie;
 }
 
 export default Partie;

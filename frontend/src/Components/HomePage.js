@@ -3,10 +3,10 @@
 import React from 'react';
 import PartieDescription from './PartieDescription';
 import '../App.css';
-import {useHistory} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
-import { getRooms } from '../utils/Api';
+import { getRooms, createPartie } from '../utils/Api';
 
 
 // PARAMETRES
@@ -25,78 +25,50 @@ class HomePage extends React.Component {
     }
     // BINDING DES FONCTIONS 
     this.handleError = this.handleError.bind(this);
-    this._refresh = this._refresh.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
   }
 
   handleError(error) {
     //to implement
   }
 
-  async _refresh () {
-    const rooms = await getRooms(this.props.token, this.handleError);
-    this.setState({
-      rooms: rooms
+  componentDidMount () {
+    getRooms(this.props.token, this.handleError).then( (res) => {
+      console.log(res); // à effacer quand ça ira mieux
+      this.setState({
+      rooms: res.data
     });
+    }
+
+    );
+    
+  }
+
+  handleCreate() {
+    createPartie(1).then(response => {
+      this.props.history.push(`/partie/${response.data}`);
+    })
   }
 
   render() {
-/*
-  listPartiesDispaly = this.rooms.map((room) => {
+  const listPartiesDisplay = this.state.rooms.map((room) =>
     <PartieDescription 
       id={room.id}
-      nbRounds={room.nbRounds}
-      players={room.players}
-      places={room.places}
-      partieName={room.partieName}
-      creatorId={room.creatorId}
-      createdAt={room.createdAt}
-      isEnded={room.isEnded}
-      onJoin={this.props.onJoin}
-      onSupprime={this.props.onSupprime}
-      type={this.props.type}
     />
-  });
-  */
-      
-
-
-
-    const listeParties = [
-      { id_partie: 1,
-        titre: 'titre de la partie 1',
-        creator:'créateur partie 1'
-      },
-      { id_partie: 2,
-        titre: 'titre de la partie 2',
-        creator:'créateur partie 2'
-      },
-      { id_partie: 3,
-        titre: 'titre de la partie 3',
-        creator:'créateur partie 3'
-      }
-        ];
-  
-    const listeItems = listeParties.map( (partie) => <PartieDescription partie={partie} /> );
-
-    /*
-    let history = useHistory();
-    function onNavigateCreatePartie() {
-      console.log("Je veux créer une nouvelle partie !")
-      history.push('/nouvellepartie');
-    };*/
+  );
 
       return(
-        <body className="App-body">
+        <div className="App-body">
           <LinkContainer to="/nouvellepartie">
-            <Button> Créer un nouvelle partie </Button>
+            <Button variant="primary" onClick={this.handleCreate}> Créer un nouvelle partie </Button>
           </LinkContainer>
           
-          <ul> {listeItems} </ul>
-        </body>
+          <ul> {listPartiesDisplay} </ul>
+        </div>
 
 );
   }
 
 }
 
-export default HomePage;
+export default withRouter(HomePage);

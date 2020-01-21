@@ -15,21 +15,17 @@ module.exports = {
     // Parametres: ( token: string, callback: function(error))
     // Result: [{ id: int, partieName: string, creatorId: int, isEnded: boolean, players: int, places: int, nbRounds: int, createdAt: date, user: objectUser }]
     // Function: liste les partie jouables
-    getRooms (token, callback) {
-        return axios({
-            url: 'http://localhost:8080/api/parties/', 
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': 'Bearer '+token
-            },
-        }).then(reponse => {
-            return reponse.data;
-        }).catch(error => {
-            callback(error);
-            return [];
-        });
+    getRooms () {
+        return axios.get('http://localhost:8080/api/partie/getParties');
     },
+
+    createPartie (id) {
+        return axios.post('http://localhost:8080/api/partie/createPartie', { id });
+    },
+
+
+
+
 
     // Access: User
     // Parametres: ( roomId: int, token: string, callback: function(error))
@@ -97,33 +93,6 @@ module.exports = {
         }).catch(error => {
             callback(error);
             return { 'token': "", 'username': null, 'userId': -1, 'isAdmin': false}
-        });
-    },
-
-
-
-    // Access: Admin
-    // Params: ( partieName:string, places: int, nbRounds: int, token: string, callback: function(error))
-    // Result: { partieCreated: boolean , roomId: int }
-    // Function: liste toutes les parties
-    createPartie (partieName, places, nbRounds, token, callback) {
-        return axios({
-            url: 'http://localhost:8080/api/parties',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': 'Bearer '+token,
-            },
-            data: {
-                partieName: partieName,
-                places: places,
-                nbRounds: nbRounds
-            }
-        }).then(reponse => {
-            return { partieCreated: true, roomId: reponse.data.id };
-        }).catch(error => {
-            callback(error);
-            return { partieCreated: false, roomId: -1 };
         });
     },
 

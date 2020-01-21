@@ -8,11 +8,12 @@ exports.router = (function() {
     var apiRouter = express.Router();
 
     //User routes
-    apiRouter.route('/users/register/').post(usersCtrl.register);
-    apiRouter.route('/users/login/').post(usersCtrl.login);
+    apiRouter.route('/users/register').post(usersCtrl.register);
+    apiRouter.route('/users/login').post(usersCtrl.login);
 
     //Room routes
-    apiRouter.route('/partie/getParties/').get(partieCtrl.getParties);
-
+    apiRouter.route('/partie/getParties').get(partieCtrl.getParties);
+    apiRouter.route('/partie/createPartie').post(partieCtrl.createPartie);
+    
     return apiRouter;
 })();
