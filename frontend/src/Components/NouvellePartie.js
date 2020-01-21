@@ -1,9 +1,17 @@
 import React from 'react';
 import '../App.css';
 
-function NouvellePartie() {
+class NouvellePartie extends React.Component {
 
-  return(<p>Ici tu vas pouvoir créer une nouvelle partie !</p>);
+  render(){
+
+    return(
+      <div>
+        <h3>Ici tu vas pouvoir créer une nouvelle partie !</h3>
+        <p> Choisis un mot à faire deviner </p>
+      </div>
+    );
+  }
 }
 
 export default NouvellePartie;

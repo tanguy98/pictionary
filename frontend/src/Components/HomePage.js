@@ -41,7 +41,6 @@ class HomePage extends React.Component {
     }
 
     );
-    
   }
 
   handleCreate() {
@@ -59,10 +58,7 @@ class HomePage extends React.Component {
 
       return(
         <div className="App-body">
-          <LinkContainer to="/nouvellepartie">
             <Button variant="primary" onClick={this.handleCreate}> Créer un nouvelle partie </Button>
-          </LinkContainer>
-          
           <ul> {listPartiesDisplay} </ul>
         </div>
 
