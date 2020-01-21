@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
+    "username": "pictionary_user",
+    "password": "kHnDD6XgSpx7pyqMJnSAjTxI5nOwFcp2",
     "database": "database_development_pictionary",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "test": {
-    "username": "root",
-    "password": "",
+    "username": "pictionary_user",
+    "password": "kHnDD6XgSpx7pyqMJnSAjTxI5nOwFcp2",
     "database": "database_test_pictionary",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": "",
+    "username": "pictionary_user",
+    "password": "kHnDD6XgSpx7pyqMJnSAjTxI5nOwFcp2",
     "database": "database_production_pictionary",
     "host": "127.0.0.1",
     "dialect": "mysql",

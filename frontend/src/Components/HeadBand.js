@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../../Assets/logo.svg';
-import '../../App.css';
+import logo from '../Assets/pencil2.svg';
+import '../App.css';
 
 function HeadBand() {
     return (
@@ -9,7 +9,6 @@ function HeadBand() {
                 <img src={logo} className="App-logo" alt="logo" />
                 <h1> PICTIONARY </h1>
                 <div/> {/* ne pas supprimer permet de gérer la présentation du bandeau titre (logo tout à gauche et titre centré)*/}
-                    
             </header>
         
             <div className="BandeNoire"/>

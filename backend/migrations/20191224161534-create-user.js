@@ -2,11 +2,15 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
-      id_user: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      email: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
       username: {
         allowNull: false,
@@ -28,8 +32,8 @@ module.exports = {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
-          key: 'id_user'
+          model: 'Parties',
+          key: 'id'
         }
       },
       createdAt: {

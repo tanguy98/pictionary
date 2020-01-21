@@ -1,39 +1,29 @@
 import React from 'react';
-import HeadBand from './Components/HeadBand/HeadBand.js';
-import Partie from './Components/Partie/Partie.js';
+import HeadBand from './Components/HeadBand';
+import HomePage from './Components/HomePage';
+import Login from './Components/Login';
+import Partie from './Components/Partie';
+import NouvellePartie from './Components/NouvellePartie';
+import Register from './Components/Register';
 import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App() {
 
-  const listeParties = [
-    { id_partie: 1,
-      titre: 'titre de la partie 1',
-      creator:'créateur partie 1'
-    },
-    { id_partie: 2,
-      titre: 'titre de la partie 2',
-      creator:'créateur partie 2'
-    },
-    { id_partie: 1,
-      titre: 'titre de la partie 3',
-      creator:'créateur partie 3'
-    }
-      ];
-
-  const listeItems = listeParties.map( (partie) => <Partie partie={partie} /> );
-
   return(
     <div className="App">
-     
-      <HeadBand/>
       
-      <body className="App-body">
-        <button> Créer un nouvelle partie </button>
-        <ul> {listeItems} </ul>
-      </body>
+      <HeadBand/>
 
-      <footer/>
+      <Router>
+        <Route path='/homepage' component={HomePage}/>
+        <Route path='/login' component={Login}/>
+        <Route path='/partie' component={Partie}/>
+        <Route path='/nouvellepartie' component={NouvellePartie}/>
+        <Route path='/register' component={Register}/>
+      </Router>
 
+      <footer> Site Web concu par Tanguy Houette</footer>
     </div>
   );
 }
