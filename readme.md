@@ -1,6 +1,6 @@
 # PROJET PICTIONARY
 ###### Produit par © Tanguy Houette
-readme réalisé sur https://dillinger.io/ 
+readme réalisé sur https://dillinger.io/ et grâce à https://commonmark.org/help/tutorial/07-links.html
 
 -------------------
 #### Description générale du projet :

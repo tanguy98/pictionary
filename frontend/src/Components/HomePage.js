@@ -33,15 +33,15 @@ class HomePage extends React.Component {
   }
 
   componentDidMount () {
-    getRooms(this.props.token, this.handleError).then( (res) => {
-      console.log(res); // à effacer quand ça ira mieux
+    getRooms().then( (res) => {
       this.setState({
-      rooms: res.data
+      rooms: res.data.data
     });
     }
-
-    );
-  }
+  ).catch(function(e) {
+    console.error(e.message);
+  });
+}
 
   handleCreate() {
     createPartie(1).then(response => {
@@ -50,11 +50,13 @@ class HomePage extends React.Component {
   }
 
   render() {
-  const listPartiesDisplay = this.state.rooms.map((room) =>
+    console.log('dans render')
+    console.log(this.state.rooms)
+    const listPartiesDisplay = this.state.rooms.map((room) =>
     <PartieDescription 
       id={room.id}
     />
-  );
+    );
 
       return(
         <div className="App-body">

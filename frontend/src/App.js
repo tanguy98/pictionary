@@ -1,13 +1,20 @@
+//IMPORTS
+
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
+// "HOMEMADE" COMPONENTS IMPORTS
 import HeadBand from './Components/HeadBand';
 import HomePage from './Components/HomePage';
 import Login from './Components/Login';
 import Partie from './Components/Partie';
 import NouvellePartie from './Components/NouvellePartie';
 import Register from './Components/Register';
-import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+//COMPONENTS :
 
 class App extends React.Component {
     render() {
