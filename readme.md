@@ -30,4 +30,13 @@ Le site est encore en développement et n'est pas disponible en ligne. Vous pouv
 Les fonctionnalités disponibles actuellement correspondent à celles des étapes 1 et 2 du cahier des charges :
 
 #### Procédure d'installation détaillée :
+
 #### Comment précharger les données :
+
+####### Mise en place de la base de donnée :
+Installer MySQL blabla cf doc
+Pour créer les bases de données, sur le server exécuter les commandes contenues dans reset database.sql
+Dans le back, exécuter les commandes :
+>npx sequelize-cli db:migrate
+>npx sequelize-cli db:seed:all
+La première commande crée les tables dans les bases de données.
