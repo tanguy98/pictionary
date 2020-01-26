@@ -3,38 +3,37 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 // "HOMEMADE" COMPONENTS IMPORTS
 import HeadBand from './Components/HeadBand';
-import HomePage from './Components/HomePage';
-import Login from './Components/Login';
-import Partie from './Components/Partie';
-import NouvellePartie from './Components/NouvellePartie';
-import Register from './Components/Register';
-
+import Routes from './Components/Routes';
 
 //COMPONENTS :
 
 class App extends React.Component {
-    render() {
-      return(
-        <div className="App">
-          
-          <HeadBand/>
 
-          <Router>
-            <Route path='/homepage' component={HomePage} />
-            <Route path='/login' component={Login}/>
-            <Route path='/partie/:id_partie' component={Partie}/>
-            <Route path='/nouvellepartie' component={NouvellePartie}/>
-            <Route path='/register' component={Register}/>
-          </Router>
-
-          <footer> Site Web conçu par © Tanguy Houette</footer>
-        </div>
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false,
+      isAdmin: false
     }
+  }
+
+  render() {
+    return(
+      <div className="App">
+        <Router>
+          <HeadBand/>
+            <Routes/>
+        </Router>
+
+        <div className="BandeNoire"/>
+        <footer> Site Web conçu par © Tanguy Houette</footer>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -3,19 +3,10 @@
 import React, {Component} from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
-import {Button} from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import { login } from '../utils/Api';
+import {Button, Col, Form} from 'react-bootstrap';
+import { APIlogin } from '../utils/Api';
+import auth from '../utils/Auth';
 
-//PARAMETRES
-const NO_ERROR = {
-    error: false,
-    status: 200,
-    message: ""
-};
-
-const PASSWORD_REGEX = /^(?=.*\d).{4,8}$/;
-const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // COMPONENT :
 
@@ -24,82 +15,51 @@ class Login extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            connectAdmin: false,
-            connectUser: false,
-            error: NO_ERROR,
-            email: "",
+            username: "",
             password: "",
-            formErrors: {
-                email: "",
-                password: "",
-              }
-
         }
         // BINDING :
         this.handleLogin = this.handleLogin.bind(this);
-        this.handleError = this.handleError.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
     // Fonction exécutée au log in : 
-    async handleLogin(event) {
-                // Connexion
-                console.log(event);
-                /*event.preventDefault();
-
-                const { email, password } = this.state;
-        
-                if (!email || !password ) {
-                   this.handleError('missing parameters');
-                } else if (!EMAIL_REGEX.test(email)) {
-                    this.handleError('wrong email format');
-                } else if (!PASSWORD_REGEX.test(password)) {
-                    this.handleError('password must be between 4 and 8 chars with at least a number');
+    handleLogin(event) {
+        event.preventDefault();
+        let username = event.target.username.value;
+        let password = event.target.password.value;
+        console.log(username);
+        console.log(password);
+        APIlogin(username, password).then( (res) => {
+            // Vérifier que le login a été successful
+            if (res.loginSuccessful) {
+                if (res.isAdmin) {
+                    //router vers la page d'administration
                 } else {
-                    const result = await login(email, password, this.handleError)
-                    const action = { type: "CREATE_USER", value: { token: result.token, username: result.username, userId: result.userId, isAdmin: result.isAdmin } };
-                    if (result.isAdmin){
-                        this.props.dispatch(action);
-                        this.setState({
-                            connectAdmin: true
-                        });
-                    } else if (result.token) {
-                        this.props.dispatch(action);
-                        this.setState({
-                            connectUser: true
-                        });
-                    }
-                }*/
-                
+                    auth.login(() => {
+                        this.props.history.push("/homepage");
+                      });
+                }
+            } else {
+                alert('Unable to login, try again')
             }
+        });       
+    }
 
-    // GESTION D ERREUR :
-    handleError (error) {
-        console.log(error)
-        let status = 500;
-        let message = "error occured, please refresh page";
-        if (error && error.response) {
-            status = error.response.status;
-            message = "error : " + error.response.data.error + "; message : " + error.response.data.message;
-        } else if (error) {
-            message = error;
-        }
-        
+    handleClick() {
+        this.props.history.push("/homepage");
+    }
+
+    // Met à jour le state avec les valeurs des inputs
+    handleChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
         this.setState({
-            error: {
-                error: true,
-                status: status,
-                message: message
-            }
+          [name]: value
         });
-    }
+      }
 
-    handleChange (event) {
-        // to implement
-    }
-
-// parametre value
-//onChange pour mettre a jour le state
 
 
   render() {
@@ -107,31 +67,60 @@ class Login extends Component {
 
         <div>
             <h3>Login</h3>
-
+            <br/>
             <Form onSubmit={this.handleLogin}>
-                <Form.Group controlId="formBasicUsername">
-                    <Form.Label>Email : </Form.Label>
-                    <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    />
-                </Form.Group>
+                <Form.Row>
+                    <Col><br/></Col>
+                    <Col>
+                        <Form.Group controlId="formBasicUsername">
+                                <Form.Row>
+                                    <Col>
+                                        <Form.Label>Username : </Form.Label>
+                                    </Col>
+                                    <Col>
+                                        <Form.Control
+                                        type="username"
+                                        placeholder="Enter username"
+                                        onChange={this.handleChange}
+                                        name="username"
+                                    />
+                                    </Col>
+                                </Form.Row>
+                        </Form.Group>
+                    </Col>
+                    <Col><br/></Col>
+                </Form.Row>
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password : </Form.Label>
-                    <Form.Control
-                    type="password"
-                    placeholder="Password"
-                     />
-                </Form.Group>
-
+                <Form.Row>
+                    <Col><br/></Col>
+                    <Col>
+                        <Form.Group controlId="formBasicPassword">
+                                <Form.Row>
+                                    <Col>
+                                        <Form.Label>Password : </Form.Label>
+                                    </Col>
+                                    <Col>
+                                        <Form.Control
+                                        type="password"
+                                        placeholder="Enter password"
+                                        onChange={this.handleChange}
+                                        name="password"
+                                    />
+                                    </Col>
+                                </Form.Row>
+                        </Form.Group>
+                    </Col>
+                    <Col><br/></Col>
+                </Form.Row> 
+            
                 <Button variant="primary" type="submit">
                     Connexion
                 </Button>
 
             </Form>
-
             <Link to="/register">Créer un compte</Link>
+            <br/>
+            <br/>
         </div>
 );
   }

@@ -4,7 +4,6 @@ import React from 'react';
 import PartieDescription from './PartieDescription';
 import '../App.css';
 import {withRouter} from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
 import { getRooms, createPartie } from '../utils/Api';
 
@@ -24,34 +23,29 @@ class HomePage extends React.Component {
         error: null
     }
     // BINDING DES FONCTIONS 
-    this.handleError = this.handleError.bind(this);
-    this.handleCreate = this.handleCreate.bind(this);
+    this.handleCreatePartie = this.handleCreatePartie.bind(this);
   }
 
-  handleError(error) {
-    //to implement
-  }
+
 
   componentDidMount () {
     getRooms().then( (res) => {
       this.setState({
       rooms: res.data.data
+      });
     });
-    }
-  ).catch(function(e) {
-    console.error(e.message);
-  });
-}
+  }
 
-  handleCreate() {
-    createPartie(1).then(response => {
-      this.props.history.push(`/partie/${response.data}`);
+  handleCreatePartie() {
+    //1 should be userID of the logged in person after we have implemented the authentication methods
+    createPartie(1).then( response => {
+      this.props.history.push(`/partie/${response.data.data}`);
     })
   }
 
   render() {
-    console.log('dans render')
-    console.log(this.state.rooms)
+
+    // Mapping des rooms disponibles
     const listPartiesDisplay = this.state.rooms.map((room) =>
     <PartieDescription 
       id={room.id}
@@ -60,13 +54,17 @@ class HomePage extends React.Component {
 
       return(
         <div className="App-body">
-            <Button variant="primary" onClick={this.handleCreate}> Créer un nouvelle partie </Button>
+          <br/>
+          <Button variant="primary" onClick={this.handleCreatePartie}> Créer un nouvelle partie </Button>
+          <br/>
+          <h3> Pour jouer rapidement, voilà les parties disponibles :</h3>
+          <br/>
           <ul> {listPartiesDisplay} </ul>
+          <br/>
         </div>
 
 );
   }
-
 }
 
-export default withRouter(HomePage);
+export default HomePage;

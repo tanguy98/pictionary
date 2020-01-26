@@ -3,9 +3,7 @@
 module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert('Words', [{
-        word: "chien",
-        createdAt: new Date(),
-        updatedAt: new Date()
+        word: "environnement"
       }], {});
   },
 

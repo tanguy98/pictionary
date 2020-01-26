@@ -20,8 +20,11 @@
   color: #5E636C;
 }
 
+.Bande {
+  min-height: 3vh;
+}
+
 .App-body {
-  background-color: rgb(240, 240, 240);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,27 +35,9 @@
 
 }
 
-.App-link {
-  color: #09d3ac;
-}
 
 .BandeNoire {
   background-color:#5E636C;
-  min-height: 1vh;
+  min-height: 0.5vh;
 }
 
-.Partie-description {
-  color: black;
-  border-color: black;
-  border-width:2;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-};
-
-.Bloc-partie-caract {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-}

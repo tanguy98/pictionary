@@ -5,7 +5,6 @@ module.exports = {
   
   up: (queryInterface) => {
     return queryInterface.bulkInsert('Users', [{
-        email:'admin@admin.fr',
         username: 'admin',
         password:bcryptedPassword,
         isAdmin: 1,

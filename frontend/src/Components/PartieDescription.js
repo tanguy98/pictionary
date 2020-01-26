@@ -2,8 +2,7 @@
 
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {Button} from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import {Button, Card} from 'react-bootstrap';
 import '../App.css';
 import {joinPartie} from '../utils/Api';
 
@@ -23,26 +22,26 @@ class PartieDescription extends React.Component {
 
     handleJoin() {
         joinPartie(1,1).then(response => { 
-          this.props.history.push(`/partie/${response.data}`);
+          this.props.history.push(`/partie/${response.data.data}`);
         })
       }
 
     render() {
         return(
-        <div className="Partie-description">
-            <div className="Bloc-partie-caract">
-                <h3>Partie n° {this.props.id} : </h3>
-            </div>
-            <div/>
-            <Button variant="primary" onClick={this.handleJoin}> Rejoindre </Button>
-        </div>
+          <div>
+            <br/>
+          <Card border="secondary" style={{ width: '50rem' }}>
+            <Card.Header as="h5">Partie n°{this.props.id}</Card.Header>
+            <Card.Body>
+              <Card.Text>
+                Cette partie est en cours, vous pouvez la rejoindre !
+              </Card.Text>
+              <Button variant="primary" onClick={this.handleJoin}> Rejoindre </Button>
+            </Card.Body>
+          </Card>
+          </div>
     )
 }
 }
-
-PartieDescription.propTypes = {
-    id: PropTypes.string
-}
-
 
 export default withRouter(PartieDescription);

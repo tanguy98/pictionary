@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Partie.associate = function(models) {
     // associations can be defined here
-    models.Partie.hasMany(models.User)
+    models.Partie.hasMany(models.User, {foreignKey: {name: 'id_partie', as: 'id'}})
   };
   return Partie;
 };

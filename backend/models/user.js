@@ -2,7 +2,6 @@
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    email: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     isAdmin: DataTypes.BOOLEAN,
@@ -11,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     // associations can be defined here
-    models.User.belongsTo(models.User, {
+    models.User.belongsTo(models.Partie, {
       foreignKey: {
+        name: 'id_partie',
         allowNull: true
       }
     })
