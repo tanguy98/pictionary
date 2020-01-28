@@ -47,50 +47,51 @@ class AdminPage extends React.Component {
 
   handleDeleteWord(id_word) {
 
-    deleteWord(id_word).then( (res) => {
-      let newWords = this.state.words;
-      console.log(newWords);
-
-      for( var i = newWords.length-1; i--;){
-        console.log(newWords[i]);
-        if ( newWords[i].id === id_word) newWords.splice(i, 1);
-        }
-      console.log(newWords);
-      this.setState({
-        words: newWords
+    deleteWord(id_word)
+    .then( (response) => {
+      //RECUPERATION DES MOTS :
+      getWords().then( (res) => {
+        this.setState({
+        words: res.data.data
+        });
       });
     });
   }
 
   handleDeletePartie(id_partie) {
-    deletePartie(id_partie).then( (res) => {
-          // RECUPERATION DES PARTIES :
-    getRooms().then( (res) => {
-      this.setState({
-        rooms: res.data.rooms
-        });
-    });
+    deletePartie(id_partie)
+    .then( (response) => {
+      // RECUPERATION DES PARTIES :
+      getRooms().then( (res) => {
+        this.setState({
+          rooms: res.data.rooms
+          });
+      });
     });
   }
 
   handleAddWord(event) {
     event.preventDefault();
-    createWord(event.target.addWord.value);
-    //this.setState({
-      //ongletDefaut: "words"
-    //});
+    createWord(this.state.word)
+    .then( (response) => { 
+      //RECUPERATION DES MOTS :
+      getWords().then( (res) => {
+        this.setState({
+        words: res.data.data,
+        word: ''
+        });
+      });
+    });
   }
 
   //onChange de l'input "ADD WORDS"
   handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const value = event.target.value;
+    const name = event.target.name;
     this.setState({
       [name]: value
     });
   }
-  
 
   
   render() {
@@ -186,7 +187,8 @@ class AdminPage extends React.Component {
                   type="text"
                   placeholder="Nouveau mot à faire deviner"
                   onChange={this.handleChange}
-                  name="addWord"
+                  value={this.state.word}
+                  name="word"
                   />
                 </Col>
                 <Col>

@@ -19,6 +19,8 @@ exports.router = (function() {
     //User routes
     apiRouter.route('/users/register').post(usersCtrl.register);
     apiRouter.route('/users/login').post(usersCtrl.login);
+    //to implement :
+    apiRouter.route('/users/assertAuthorization').get(usersCtrl.assertAuthorisation);
   
     //Room routes
     apiRouter.route('/partie/getParties').get(partieCtrl.getParties); //plante en ce moment...

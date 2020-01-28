@@ -35,6 +35,7 @@ module.exports = {
         console.log('Deleting word ...');
         let id = req.body.id_word;
         await models.Word.destroy({where: { id }});
+        res.status(200).json({'isDestroyed': true});
     }
 
 

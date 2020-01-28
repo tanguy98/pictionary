@@ -28,24 +28,18 @@ class Login extends Component {
         event.preventDefault();
         let username = event.target.username.value;
         let password = event.target.password.value;
-        console.log(username);
-        console.log(password);
         login(username, password).then( (res) => {
             // Vérifier que le login a été successful
-            console.log(res.data);
             if (res.data.loginSuccessful) {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('isAdmin', res.data.isAdmin);
                 localStorage.setItem('id_user', res.data.id_user);
                 localStorage.setItem('username', res.data.username);
                 axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
-                console.log(res.data.isAdmin);
                 if (res.data.isAdmin) {
                     //router vers la page d'administration
-                    console.log('coucou admin');
                     this.props.history.push("/adminpage");
                 } else {
-                    console.log('coucou user');
                     this.props.history.push("/homepage");
                 }
             } else {

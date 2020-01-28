@@ -57,8 +57,7 @@ module.exports = {
     });
     //Suppression de la partie :
     await models.Partie.destroy({where: { id }});
-    res.status(200);
+    res.status(200).json({'deleted': true});
   }
-  
 
 }
