@@ -59,6 +59,37 @@ Prochaines pistes d'amélioration :
 -----------------------------------
 #### Comment précharger les données :
 
+-----------------------------------
+#### Description des données préchargées :
+
+Les données préchargées comprennent :
+- Des mots
+Il s'agit des mots à faire deviner, on en charge une vingtaine qui permettrint d'animer le jeu.
+
+- Des utilisateurs :
+
+L'administrateur :
+
+username : admin
+mot de passe : adminpassword
+
+Des joueurs :
+
+username : player1
+mot de passe : password1
+
+username : player2
+mot de passe : password2
+
+username : player3
+mot de passe : password3
+
+username : player4
+mot de passe : password4
+
+- Aucune partie en cours : il faut en créer une pour jouer.
+
+
 --------------------------------------
 ###### Mise en place de la base de donnée :
 Installer MySQL blabla cf doc

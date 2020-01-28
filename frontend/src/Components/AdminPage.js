@@ -3,7 +3,6 @@
 import React from 'react';
 import {Table, Tabs, Tab, Button, Form, Col } from 'react-bootstrap';
 import {getRooms, getWords, deleteWord, createWord, deletePartie } from '../utils/Api';
-//import {getWords, deleteWord, createWord, deletePartie} from './utils/Api'; //pas encore crées
 
 // COMPONENT
 
@@ -26,7 +25,7 @@ class AdminPage extends React.Component {
     this.handleDeletePartie = this.handleDeletePartie.bind(this);
     this.handleDeleteWord = this.handleDeleteWord.bind(this);
     this.handleAddWord = this.handleAddWord.bind(this);
-    this.handleWordChange = this.handleWordChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount () {
@@ -64,23 +63,34 @@ class AdminPage extends React.Component {
   }
 
   handleDeletePartie(id_partie) {
-    this.setState({
-      ongletDefaut: "Parties"
+    deletePartie(id_partie).then( (res) => {
+          // RECUPERATION DES PARTIES :
+    getRooms().then( (res) => {
+      this.setState({
+        rooms: res.data.rooms
+        });
     });
-    deletePartie(id_partie);
+    });
   }
 
   handleAddWord(event) {
-    //console.log(event.target.value); // a marché ?
-    createWord('travail');
+    event.preventDefault();
+    createWord(event.target.addWord.value);
     //this.setState({
       //ongletDefaut: "words"
     //});
   }
 
-  handleWordChange(event) {
-    this.setState({word: event.target.value});
+  //onChange de l'input "ADD WORDS"
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
   }
+  
 
   
   render() {
@@ -104,7 +114,7 @@ class AdminPage extends React.Component {
           <td>{playersMap}</td>
           <td>
             <Button
-              onClick={() => this.handleDeletePartie(room.id_partie)}
+              onClick={() => this.handleDeletePartie(room.id)}
               >
                 Supprimer
             </Button>
@@ -168,20 +178,15 @@ class AdminPage extends React.Component {
             </Table>
             <br/>
 
-            <form onSubmit={this.handleAddWord}>
-              <input onChange={this.handleWordChange} />
-              <Button variant="primary" type="submit" >Add word</Button>
-            </form>
-
-            {/*<Form onSubmit={this.handleAddWord}>
+            <Form onSubmit={this.handleAddWord}>
               <Form.Row>
                 <Col><br/></Col>
                 <Col>
                   <Form.Control
-                  onChange={this.handleWordChange}
-                  placeholder="Nouveau mot à faire deviner"
-                  value={this.state.word}
                   type="text"
+                  placeholder="Nouveau mot à faire deviner"
+                  onChange={this.handleChange}
+                  name="addWord"
                   />
                 </Col>
                 <Col>
@@ -191,7 +196,7 @@ class AdminPage extends React.Component {
               </Form.Row>
               <br/>
             </Form>
-    */}
+    
             
           </Tab>
 

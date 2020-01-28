@@ -14,16 +14,18 @@ module.exports = {
     res.json({
       data: allParties,
       rooms: roomsDB
-    })
+    });
   },
 
   createPartie: async function(req,res) {
     console.log('Creating partie...');
-    let id_user = req.body.id;
+    let id_user = req.body.id_user;
+    console.log(req.body.id_user);
+    console.log(req.body);
     // créer une nouvelle partie
     const partie_cree = await models.Partie.create(); //partie_cree.id
     // Modifier isCreator et id_partie dans user
-    await User.update({ isCreator:true, id_partie:partie_cree.id }, {
+    await models.User.update({ isCreator:true, id_partie:partie_cree.id }, {
         where: {
           id:id_user
         }
@@ -36,29 +38,27 @@ module.exports = {
     let id_user = req.body.id_user;
     let id_partie = req.body.id_partie;
     // Modification de la partie dans laquelle le joueur est actuellement
-    await User.update({ isCreator:false, id_partie:id_partie }, {
+    await models.User.update({ isCreator:false, id_partie:id_partie }, {
       where: {
         id:id_user
       }
     });
+    res.status(200).json({});
   },
 
   deletePartie: async function(req,res) {
     console.log('Deleting partie...');
     let id = req.body.id_partie; //id_partie
     //Logging out des utilisateurs :
-    await User.update({ isCreator:false, id_partie:null }, {
+    await models.User.update({ isCreator:false, id_partie:null }, {
       where: {
-        id_partie: {id}
+        id_partie: id
       }
     });
     //Suppression de la partie :
     await models.Partie.destroy({where: { id }});
-    
-
-
-  
-  
+    res.status(200);
   }
+  
 
 }

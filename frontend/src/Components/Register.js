@@ -1,7 +1,6 @@
 // IMPORTS
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert'
 import { register } from '../utils/Api';
 import {Form, Button, Col} from 'react-bootstrap';
 
@@ -13,16 +12,9 @@ class Register extends React.Component {
     constructor (props) {
         super (props);
         this.state = {
-            userCreated: false,
-            error: {
-                error: false,
-                status: 200,
-                message: ""
-            },
-            email: "",
-            password: "",
-            confirmPassword: "",
             username: "",
+            password: "",
+            confirmPassword: ""
         }
 
         // binding des fonctions
@@ -43,20 +35,28 @@ class Register extends React.Component {
 
     // Fonction exécutée lors de la création d'un nouveau compte :
     handleRegister(event) {
+        event.preventDefault();
         let username = event.target.username.value;
         let password = event.target.password.value;
         let confirmPassword = event.target.confirmPassword.value;
         
         if (password === confirmPassword) {
-            register(username, password).then((res)=> {
-                if (res.status()=== 200) {
+            //On envoie la requête de register
+            register(username, password)
+            .then((res)=> {
+                console.log(res.data.id);
+                if (res.data.id) {
                     alert ('Profil créé !');
                     //puis router vers la page login
+                    this.props.history.push("/login");
                 }
                 else {
                     alert('Could not create user :/ Try again');
                 }
 
+            })
+            .catch( (error) => {
+                alert(error) //essayer de rendre ça plus clair ! (erreur 409 = l'utilisateur existe déjà)
             });
         } else {
             alert ('Le mot de passe doit être identique dans les deux champs dédiés')
@@ -68,18 +68,11 @@ class Register extends React.Component {
 
         const { error, userCreated} = this.state;
 
-        // Gestion des erreurs
-        if (error.error && error.status === 500) {
-        return <Alert> Error status : {error.status}. {error.message} </Alert>
-        } else if (userCreated) {
-            //popup user created
-            return <Redirect from="/register" to="/" />
-        }
         return (
             <div>
                 <div>
                     <h3>Register</h3>
-                    <Form onSubmit={this.handleLogin}>
+                    <Form onSubmit={this.handleRegister}>
                         <br/>
 
                         <Form.Row>
@@ -137,7 +130,7 @@ class Register extends React.Component {
                                             type="password"
                                             placeholder="Confirm Password"
                                             onChange={this.handleChange}
-                                            name="confrimPassword"/>
+                                            name="confirmPassword"/>
                                         </Col>
                                     </Form.Row>
                                 </Form.Group>
@@ -146,7 +139,7 @@ class Register extends React.Component {
                         </Form.Row>
 
                         <Button variant="primary" type="submit">
-                            Connexion
+                            Créer un compte
                         </Button>
                         <br/>
                     </Form>
@@ -154,7 +147,7 @@ class Register extends React.Component {
                     <Link to={'/login'}>
                         Back to login
                     </Link>
-                    <Button onClick={()=> {this.props.history.push("/login")}}>Test routing</Button>
+
                     <br/>
                     <br/>
                 </div>

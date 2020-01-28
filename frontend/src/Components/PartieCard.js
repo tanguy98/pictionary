@@ -6,7 +6,7 @@ import {Button, Card} from 'react-bootstrap';
 import '../App.css';
 import {joinPartie} from '../utils/Api';
 
-class PartieDescription extends React.Component {
+class PartieCard extends React.Component {
 
     constructor (props) {
         super (props);
@@ -21,9 +21,12 @@ class PartieDescription extends React.Component {
       }
 
     handleJoin() {
-        joinPartie(1,1).then(response => { 
-          this.props.history.push(`/partie/${response.data.data}`);
-        })
+      const id_user = localStorage.getItem('id_user'); // user connecté
+      const id_partie = this.props.id;
+      joinPartie(id_user,id_partie)
+      .then( (response) => { 
+        this.props.history.push(`/partie/${response.data.data}`);
+      });
       }
 
     render() {
@@ -44,4 +47,4 @@ class PartieDescription extends React.Component {
 }
 }
 
-export default withRouter(PartieDescription);
+export default withRouter(PartieCard);

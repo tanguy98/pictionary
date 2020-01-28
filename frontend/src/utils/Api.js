@@ -11,12 +11,12 @@ module.exports = {
 
     createPartie (id_user) {
         console.log('Creating partie ...');
-        return axios.post('http://localhost:8080/api/partie/createPartie', { id_user });
+        return axios.post('http://localhost:8080/api/partie/createPartie', {id_user});
     },
 
     joinPartie (id_user,id_partie) {
         console.log('Joining partie...');
-        return axios.post('http://localhost:8080/api/partie/createPartie', { id_user, id_partie });
+        return axios.post('http://localhost:8080/api/partie/joinPartie', { id_user, id_partie });
         //implementing
     },
 
@@ -32,7 +32,7 @@ module.exports = {
 
     createWord(word) {
         console.log('Creating word...');
-        return axios.post('http://localhost:8080/api/word/createWord', { word: {word} } );
+        return axios.post('http://localhost:8080/api/word/createWord', {word} );
     },
 
     deletePartie(id_partie) {
@@ -41,16 +41,15 @@ module.exports = {
     
     },
 
-
     login(username, password) {
         console.log('Logging in ...');
-        return axios.post('http://localhost:8080/api/users/register', { username: username, password: password })
+        return axios.post('http://localhost:8080/api/users/login', { username, password })
         
     },
 
     register(username, password) {
         console.log('Registering new user ...');
-        return axios.post('http://localhost:8080/api/users/register', { username: username, password: password });
+        return axios.post('http://localhost:8080/api/users/register', { username, password });
     },
 
 

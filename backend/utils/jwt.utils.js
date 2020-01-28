@@ -12,16 +12,18 @@ module.exports = {
             isAdmin: userData.isAdmin
             },
             JWT_SIGN_SECRET,
-            {expiresIn: '1h'}
+            {expiresIn: '7d'}
         )
     },
 
-    /*
+    
     parseAuthorization: function (authorization) {
         return (authorization != null) ? authorization.replace('Bearer ', '') : null;
-    },*/
+    },
 
-    getUserId: function (authorization) {
+    //fusionner les deux du dessous :
+    getUserId: function (req) {
+        const authorization = req.get('Authorization');
         let id_user = -1;
         let token = module.exports.parseAuthorization(authorization);
 
@@ -36,7 +38,8 @@ module.exports = {
         return id_user;
     },
 
-    getIsAdmin: function (authorization) {
+    getIsAdmin: function (req) {
+        const authorization = req.get('Authorization');
         let isAdmin = 0;
         let token = module.exports.parseAuthorization(authorization);
         if (token != null) {

@@ -4,8 +4,8 @@ import React, {Component} from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import {Button, Col, Form} from 'react-bootstrap';
-import { APIlogin } from '../utils/Api';
-import auth from '../utils/Auth';
+import { login } from '../utils/Api';
+import axios from 'axios';
 
 
 // COMPONENT :
@@ -30,15 +30,23 @@ class Login extends Component {
         let password = event.target.password.value;
         console.log(username);
         console.log(password);
-        APIlogin(username, password).then( (res) => {
+        login(username, password).then( (res) => {
             // Vérifier que le login a été successful
-            if (res.loginSuccessful) {
-                if (res.isAdmin) {
+            console.log(res.data);
+            if (res.data.loginSuccessful) {
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('isAdmin', res.data.isAdmin);
+                localStorage.setItem('id_user', res.data.id_user);
+                localStorage.setItem('username', res.data.username);
+                axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
+                console.log(res.data.isAdmin);
+                if (res.data.isAdmin) {
                     //router vers la page d'administration
+                    console.log('coucou admin');
+                    this.props.history.push("/adminpage");
                 } else {
-                    auth.login(() => {
-                        this.props.history.push("/homepage");
-                      });
+                    console.log('coucou user');
+                    this.props.history.push("/homepage");
                 }
             } else {
                 alert('Unable to login, try again')

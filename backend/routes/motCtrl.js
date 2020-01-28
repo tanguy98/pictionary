@@ -18,10 +18,17 @@ module.exports = {
     createWord: async function(req,res) {
         console.log('Creating word...');
         let word = req.body.word;
-        // créer une nouvelle partie
-        console.log(word.word);
-        const word_cree = await models.Word.create( {word: req.body.word.word} );
-        res.json({data: partie_cree.id});
+
+        //On vérifie que le mot n'est pas déjà dans la DB
+        let motFound = await models.Word.findOne({where: {word}});
+
+        if (!motFound) {
+          // créer un nouveau mot
+          const wordCreated = await models.Word.create({word: req.body.word});
+          res.status(200).json({data: wordCreated.id});
+        } else {
+          res.status(409).json({'error': 'Word  already exists'});
+        }
       },
 
     deleteWord: async function(req,res) {

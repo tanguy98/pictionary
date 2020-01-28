@@ -11,7 +11,7 @@ exports.router = (function() {
     // Paramètres de connexion
     apiRouter.use(function(req, res, next) {
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         next();
       });
@@ -24,16 +24,12 @@ exports.router = (function() {
     apiRouter.route('/partie/getParties').get(partieCtrl.getParties); //plante en ce moment...
     apiRouter.route('/partie/createPartie').post(partieCtrl.createPartie);
     apiRouter.route('/partie/joinPartie').post(partieCtrl.joinPartie);
-    //To debug
-    apiRouter.route('/partie/deletePartie').delete(partieCtrl.joinPartie);
-    
+    apiRouter.route('/partie/deletePartie').delete(partieCtrl.deletePartie); 
 
     //Word routes
     apiRouter.route('/word/getWords').get(motCtrl.getWords);
     apiRouter.route('/word/deleteWord').delete(motCtrl.deleteWord);
-    // to debug
     apiRouter.route('/word/createWord').post(motCtrl.createWord);
-    
     
     return apiRouter;
 })();
