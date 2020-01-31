@@ -26,10 +26,10 @@ Le frontend utilise le framework CSS Bootstrap.
 Le frontend et le backend communiquent via le module de requêtes http axios. \
 Le server utilise le module sequelize pour accéder à la DB MySQL. \
 La gestion de droits des utilisateurs est effectuée avec le module Json Web Tokens. Les tokens sont stockés localement. Les mots de passes des utilisateurs sont encodés avec bcrypt. \
-Le server utilise aussi Socket.io pour mettre en place la communication en temps réelle nécessaire pour le jeu. \
+Le server utilise aussi Socket.io pour mettre en place la communication en temps réelle nécessaire pour le jeu.
 
 URL de application React : http://localhost:3000 \
-URL du server : http://localhost:8080 \
+URL du server : http://localhost:8080
 
 Pour plus d'informations sur les dépendances du projet, vous pouvez vous référrer à la section dependencies des fichiers package.json ( du [frontend](./frontend/package.json) et du [backend](./backend/package.json))
 
@@ -43,13 +43,16 @@ Une fois connecté, il accède à la page d'accueil du site qui présente une li
 
 Si l'utilisateur dispose des droits d'administrateurs, il est redirigé à sa connexion vers une page dont les différents onglets lui permettent d'administrer la base des donnée. Il a accès à la liste des mots disponibles (à faire deviner dans le jeu) et peut en ajouter ou en supprimer. Il a également accès à la liste des parties en cours et peut en supprimer.
 
-Déroulé d'une partie : \
-Les parties sont encore rudimentaires
-Elle se déroule en 3 manches. Le créateur de la partie, une fois que les autres participants se sont connectés, peut entammer la première manche : il commence à dessiner sur un "tableau" le mot qui lui est imposé. Les autres joueurs voient son dessin en temps réel. Le premier des joueurs supplémentaires propose le mot, si celui-ci correspond, il remporte la manche et marque un point. Les manches s'enchînent ainsi. Le vainqueur est celui qui a le plus de points. A la fin de la partie, les joueurs peuvent relancer la partie, revenir à la page d'accueil ou se déconnecter.
+**Déroulé d'une partie** : \
+Les parties sont encore rudimentaires, et toutes les fonctionnalités prévues ne sont pas encore fonctionnelles.
 
-Pistes d'amélioration du projet :
+Lorsqu'il crée une partie, l'utilisateur a accès à une page sur laquelle le jeu lui impose un mot à dessiner, et lui propose un cadre dans lequel dessiner. Il a accès à quelques fonctionnalité de dessin (couleur et épaisseur du trait, effacer le dernier coup de pinceau [pas encore fonctionnel]). Si un autre utilisateur le rejoint dans sa partie, il voit également le cadre et le dessin qui s'affiche en temps réel. Il peut aussi essayer de deviner le mot. [Non fonctionnel également].
 
-- Complexifier le déroulement d'une partie (calcul du score prenant en compte le temps de réponse, affichage des scores)
+Le score est calculé simplment : le joueur qui devine le mot remporte la manche et marque un point. Les 3 manches s'enchaînent ainsi. Le vainqueur de la partie est celui qui a le plus de points. A la fin de la partie, les joueurs sont redirigés vers la page d'accueil (sur laquelle ils peuvent rejouer ou se déconnecter).
+
+**Pistes d'amélioration du projet** :
+
+- Debugguer et complexifier le déroulement d'une partie (calcul du score prenant en compte le temps de réponse, affichage des scores)
 - Gestion d'erreur et des status dans les requêtes http entre le front et le back
 - Sécurité de l'authentification (utiliser https, le protected routing...)
 - Résilience des données : vérification plus stricte des données chargées dans la base de donnée
@@ -82,21 +85,21 @@ Il s'agit des mots à faire deviner, on en charge une vingtaine qui permettront 
 
 L'administrateur :
 
->**username** : admin
+>**username** : admin \
 **mot de passe** : adminpassword
 
 Des joueurs :
 
->**username** : player1
+>**username** : player1 \
 **mot de passe** : password1
 
->**username** : player2
+>**username** : player2 \
 **mot de passe** : password2
 
->**username** : player3
+>**username** : player3 \
 **mot de passe** : password3
 
->**username** : player4
+>**username** : player4 \
 **mot de passe** : password4
 
 Aucune partie en cours : il faut en créer une pour jouer.
