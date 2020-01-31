@@ -1,6 +1,7 @@
 # PROJET PICTIONARY
 
 ##### Produit par © Tanguy Houette
+Contact : tanguy.houette@student-cs.fr 
 
 -------------------
 #### Description générale du projet :
