@@ -74,6 +74,15 @@ Cette commande crée les tables users, words et partie.
 
 Cette commande précharge les données dans la base de donnée.
 
+Pour lancer l'application (exécuter dans le front) :
+
+> npm start
+
+Pour lancer le server (exécuter dans le backend) :
+
+> node server.js
+
+
 -----------------------------------
 #### Description des données préchargées :
 
