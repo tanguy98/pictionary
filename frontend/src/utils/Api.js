@@ -53,6 +53,12 @@ function assertAuthorisation () {
 
 }
 
+function leavePartie(id_user) {
+    console.log('Leaving room (to implement) ...');
+    // to implement
+}
+
+
 module.exports = {
     getRooms,
     createPartie,
@@ -63,5 +69,6 @@ module.exports = {
     deletePartie,
     login,
     register,
-    assertAuthorisation
+    assertAuthorisation,
+    leavePartie
 }

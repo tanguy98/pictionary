@@ -1,6 +1,6 @@
 // IMPORTS
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { register } from '../utils/Api';
 import {Form, Button, Col} from 'react-bootstrap';
 
@@ -65,8 +65,6 @@ class Register extends React.Component {
     }
 
     render() {
-
-        const { error, userCreated} = this.state;
 
         return (
             <div>

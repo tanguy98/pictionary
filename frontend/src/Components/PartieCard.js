@@ -24,10 +24,16 @@ class PartieCard extends React.Component {
       const id_user = localStorage.getItem('id_user'); // user connecté
       const id_partie = this.props.id;
       joinPartie(id_user,id_partie)
-      .then( (response) => { 
-        this.props.history.push(`/partie/${response.data.data}`);
+      .then( (response) => {
+        this.props.history.push({
+          pathname: `/partie/${response.data.data}`,
+          state: {
+            id_partie: response.data.data,
+            isCreator: false
+          }
+        });
       });
-      }
+    }
 
     render() {
         return(

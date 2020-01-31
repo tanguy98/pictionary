@@ -3,7 +3,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
 // "HOMEMADE" COMPONENTS IMPORTS
 import HeadBand from './Components/HeadBand';
@@ -19,22 +19,21 @@ import Register from './Components/Register';
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     return(
       <div className="App">
         <Router>
           <HeadBand/>
-            <Switch>
+            <Switch> 
               <Route path='/adminpage' component={AdminPage}/>
               <Route path='/homepage' component={HomePage} />
               <Route path='/partie/:id_partie' component={Partie}/>
               <Route path='/nouvellepartie' component={NouvellePartie}/>
               <Route path='/login' component={Login}/>
               <Route path='/register' component={Register}/>
+              <Route path='/' component={() => <Redirect to='/login'/>}/>
               <Route path='*' component={() => "404 NOT FOUND"}/>
           </Switch>
         </Router>

@@ -7,7 +7,7 @@ import {isAuthenticated} from '../utils/auth';
 import AdminPage from './AdminPage';
 import HomePage from './HomePage';
 import Login from './Login';
-import Partie from './Partie';
+import Partie from './PartieBrouillon';
 import NouvellePartie from './NouvellePartie';
 import Register from './Register';
 
@@ -29,10 +29,11 @@ class ProtectedRoutes extends React.Component {
 
     }
 
+    /*
     async componentDidMount () {
         const isAuth = await isAuthenticated();
         this.setState( isAuth );
-    }
+    } */
 
     render() {
         if (this.state.isAuthenticated) {

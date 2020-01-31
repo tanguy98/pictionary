@@ -31,10 +31,16 @@ class HomePage extends React.Component {
   }
 
   handleCreatePartie() {
-    const id_user = localStorage.getItem('id_user') 
+    const id_user = localStorage.getItem('id_user');
     createPartie(id_user).then( (response) => {
-      this.props.history.push(`/partie/${response.data.data}`);
-    })
+      this.props.history.push({
+        pathname: `/partie/${response.data.data}`,
+        state: {
+          id_partie: response.data.data,
+          isCreator: true
+        }
+      });
+    });
   }
 
   render() {

@@ -136,7 +136,6 @@ class AdminPage extends React.Component {
           </Button>
         </td>
       </tr>
-
     );
 
     return(

@@ -43,7 +43,7 @@ module.exports = {
         id:id_user
       }
     });
-    res.status(200).json({});
+    res.status(200).json({data: id_partie});
   },
 
   deletePartie: async function(req,res) {
@@ -58,6 +58,17 @@ module.exports = {
     //Suppression de la partie :
     await models.Partie.destroy({where: { id }});
     res.status(200).json({'deleted': true});
-  }
+  },
 
+  leavePartie: async function(res,req) {
+    console.log('Leaving partie (to implement)...');
+    let id = req.body.id_user; //id_user
+    //Logging out des utilisateurs :
+    await models.User.update({ isCreator:false, id_partie:null }, {
+      where: {
+        id_user: id
+      }
+    });
+    res.status(200).json({'partieLeft': true});
+  }
 }
